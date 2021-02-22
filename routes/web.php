@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[\App\Http\Controllers\BookingController::class,'index'])->name('booking.list');
+Route::get('export',[\App\Http\Controllers\BookingController::class,'export'])->name('booking.export');
