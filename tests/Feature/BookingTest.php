@@ -8,16 +8,19 @@ use Tests\TestCase;
 
 class BookingTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function test_can_list_all_bookings()
     {
         $response = $this->getJson(route('booking.list'));
 
-        $response->assertStatus(200)
-            ->assertJsonStructure(['data']);
+        $response->assertSuccessful();
+    }
+
+    public function test_can_filter_bookings()
+    {
+        $response = $this->getJson(route('booking.list', ['search' => 'Nombre 12']));
+
+        $response->assertSuccessful()
+            ->assertSee('Nombre 12');
     }
 }
